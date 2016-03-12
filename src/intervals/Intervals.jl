@@ -16,7 +16,10 @@ export Strand,
     BEDMetadata,
     BEDInterval,
     BigBed,
-    BigWig
+    BigWig,
+    GFF3,
+    GFF3Metadata,
+    GFF3Interval
 
 using Base.Intrinsics,
     Bio.Ragel,
@@ -73,5 +76,6 @@ include("intervalstream.jl")
 # Parsing file types
 include("bed.jl")
 include("bigbed.jl")
+include("gff3.jl")
 
 end # module Intervals

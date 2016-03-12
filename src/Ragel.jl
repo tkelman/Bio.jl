@@ -134,6 +134,30 @@ macro int64_from_anchor!()
 end
 
 
+macro float64_from_anchor!()
+    quote
+        firstpos = upanchor!($(esc(:state))) - 1
+        get(ccall(
+            :jl_try_substrtod,
+            Nullable{Float64},
+            (Ptr{UInt8}, Csize_t, Csize_t),
+            $(esc(:state)).stream.buffer, firstpos, $(esc(:p)) - firstpos
+        ))
+    end
+end
+
+
+macro ascii_from_anchor!()
+    quote
+        firstpos = upanchor!($(esc(:state)))
+        n = $(esc(:p)) - firstpos + 1
+        dst = Vector{UInt8}(n)
+        copy!(dst, 1, $(esc(:state)).stream.buffer, firstpos, n)
+        ASCIIString(dst)
+    end
+end
+
+
 macro load_from_anchor!(T)
     quote
         firstpos = upanchor!($(esc(:state)))

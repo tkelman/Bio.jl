@@ -109,9 +109,12 @@ function convert(::Type{StringField}, str::ASCIIString)
     return StringField(copy(str.data), 1:length(str.data))
 end
 
-
 function convert(::Type{StringField}, str::UTF8String)
     return StringField(copy(str.data), 1:length(str.data))
+end
+
+function convert(::Type{StringField}, str::AbstractString)
+    return convert(StringField, UTF8String(str))
 end
 
 
