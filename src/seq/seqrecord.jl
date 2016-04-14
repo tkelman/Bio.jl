@@ -7,14 +7,6 @@ type SeqRecord{S <: Sequence, T}
     name::StringField
     seq::S
     metadata::T
-
-    #function SeqRecord(name, seq, metadata)
-    #    return new(name, seq, metadata)
-    #end
-
-    #function SeqRecord()
-    #    return new(StringField(), S(), T())
-    #end
 end
 
 function Base.call{S,T}(::Type{SeqRecord{S,T}})
