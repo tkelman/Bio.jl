@@ -110,7 +110,8 @@ export
     DNAAlphabet,
     RNAAlphabet,
     AminoAcidAlphabet,
-    CharAlphabet
+    CharAlphabet,
+    TwoBit
 
 using BufferedStreams,
     Base.Intrinsics,
@@ -169,6 +170,7 @@ include("seqrecord.jl")
 include("naivebayes.jl")
 include("fasta.jl")
 include("fastq.jl")
+include("twobit.jl")
 
 # DEPRECATED: defined just for compatibility
 type NucleotideSequence{T<:Nucleotide} end

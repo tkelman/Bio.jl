@@ -8,15 +8,22 @@ type SeqRecord{S <: Sequence, T}
     seq::S
     metadata::T
 
-    function SeqRecord(name, seq, metadata)
-        return new(name, seq, metadata)
-    end
+    #function SeqRecord(name, seq, metadata)
+    #    return new(name, seq, metadata)
+    #end
 
-    function SeqRecord()
-        return new(StringField(), S(), T())
-    end
+    #function SeqRecord()
+    #    return new(StringField(), S(), T())
+    #end
 end
 
+function Base.call{S,T}(::Type{SeqRecord{S,T}})
+    return SeqRecord{S,T}(StringField(), S(), T())
+end
+
+function SeqRecord(name::AbstractString, seq::Sequence, metadata)
+    return SeqRecord(convert(StringField, name), seq, metadata)
+end
 
 function seqtype{S, T}(::Type{SeqRecord{S, T}})
     return S
